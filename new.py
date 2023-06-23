@@ -18,6 +18,20 @@ dotenv.load_dotenv(dotenv_path="key.env")
 st.title("Github Analysis Project")
 profile=st.text_input("Enter the Github Profile link")
 
+def repoaccess(user):
+    username = user.split("/")[-1]
+    url = "https://api.github.com/users/{}/repos".format(username)
+    response = requests.get(url)
+    repo=[]
+    if response.status_code == 200:
+        repositories=response.json()
+        for repository in repositories:
+            repo.append(repository['html_url'])
+        return repo
+    else:
+        print("Enter valid github username")
+
+
 if profile:
     repos=repoaccess(profile) # list of all repositories in the github profile
     local_path="temp_clone"    # a temporary path for cloning temporarily.
