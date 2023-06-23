@@ -4,4 +4,3 @@ langchain
 requests
 nbformat
 python-dotenv
-subprocess
